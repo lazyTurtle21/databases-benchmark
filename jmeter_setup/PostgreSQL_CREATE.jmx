@@ -79,7 +79,7 @@
                   </elementProp>
                   <elementProp name="influxdbUrl" elementType="Argument">
                     <stringProp name="Argument.name">influxdbUrl</stringProp>
-                    <stringProp name="Argument.value">http://mysql:8086/write?db=test</stringProp>
+                    <stringProp name="Argument.value">http://grafana:8086/write?db=test</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                   <elementProp name="application" elementType="Argument">
