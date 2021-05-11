@@ -10,7 +10,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="mongoHost" elementType="Argument">
             <stringProp name="Argument.name">mongoHost</stringProp>
-            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.value">mysql</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="mongoPort" elementType="Argument">
@@ -175,7 +175,7 @@ SampleResult.setResponseMessage(&quot;Exception: &quot; + e);
                   </elementProp>
                   <elementProp name="influxdbUrl" elementType="Argument">
                     <stringProp name="Argument.name">influxdbUrl</stringProp>
-                    <stringProp name="Argument.value">http://localhost:8086/write?db=test</stringProp>
+                    <stringProp name="Argument.value">http://grafana:8086/write?db=test</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                   <elementProp name="application" elementType="Argument">
