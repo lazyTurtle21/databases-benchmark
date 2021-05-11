@@ -24,7 +24,7 @@
         <stringProp name="connectionAge">5000</stringProp>
         <stringProp name="connectionProperties"></stringProp>
         <stringProp name="dataSource">mysql_pool</stringProp>
-        <stringProp name="dbUrl">jdbc:mysql://127.0.0.1:3306/test</stringProp>
+        <stringProp name="dbUrl">jdbc:mysql://mysql:3306/test</stringProp>
         <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
         <stringProp name="initQuery">truncate reviews;</stringProp>
         <boolProp name="keepAlive">true</boolProp>
@@ -79,7 +79,7 @@
                   </elementProp>
                   <elementProp name="influxdbUrl" elementType="Argument">
                     <stringProp name="Argument.name">influxdbUrl</stringProp>
-                    <stringProp name="Argument.value">http://localhost:8086/write?db=test</stringProp>
+                    <stringProp name="Argument.value">http://grafana:8086/write?db=test</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                   <elementProp name="application" elementType="Argument">
