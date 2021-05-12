@@ -26,7 +26,7 @@
         <stringProp name="dataSource">mysql_pool</stringProp>
         <stringProp name="dbUrl">jdbc:mysql://mysql:3306/test</stringProp>
         <stringProp name="driver">com.mysql.cj.jdbc.Driver</stringProp>
-        <stringProp name="initQuery">truncate reviews;</stringProp>
+        <stringProp name="initQuery"></stringProp>
         <boolProp name="keepAlive">true</boolProp>
         <stringProp name="password">tests-password</stringProp>
         <stringProp name="poolMax">0</stringProp>
