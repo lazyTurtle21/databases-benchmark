@@ -26,7 +26,7 @@
         <stringProp name="dataSource">mysql_pool</stringProp>
         <stringProp name="dbUrl">jdbc:mysql://mysql:3306/test</stringProp>
         <stringProp name="driver">com.mysql.cj.jdbc.Driver</stringProp>
-        <stringProp name="initQuery"></stringProp>
+        <stringProp name="initQuery">truncate reviews;</stringProp>
         <boolProp name="keepAlive">true</boolProp>
         <stringProp name="password">tests-password</stringProp>
         <stringProp name="poolMax">0</stringProp>
@@ -51,28 +51,14 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Read ids" enabled="true">
-          <stringProp name="dataSource">mysql_pool</stringProp>
-          <stringProp name="query">select id from reviews;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultVariable">ids</stringProp>
-          <stringProp name="variableNames">id</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
-          <stringProp name="ForeachController.inputVal">id</stringProp>
-          <stringProp name="ForeachController.returnVal">current_id</stringProp>
-          <boolProp name="ForeachController.useSeparator">true</boolProp>
-        </ForeachController>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
+          <stringProp name="WhileController.condition">${review_id}</stringProp>
+        </WhileController>
         <hashTree>
           <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request_${__time(HH:mm dd-MM)} " enabled="true">
             <stringProp name="dataSource">mysql_pool</stringProp>
-            <stringProp name="query">delete from reviews where id=&apos;${current_id}&apos;;</stringProp>
+            <stringProp name="query">insert into reviews(id,product_title,star_rating,helpful_votes,total_votes,verified_purchase,headline,body,date) values (&apos;${review_id}&apos;,&apos;Sisterhood of the Traveling Pants (Book 1)&apos;,4.5,2,3,true,&apos;this book was a great learning novel!&apos;,&apos;this boook was a great one that you could learn from. it not only teaches the imponrtance of family and their values but it also deals with basic issues that teens and some kids even deal with.  this book is about 4 best friends who are for the first time in their lives spending their summer apart. one day they are all in one of the girls rooms and finds a pair of pants that were tucked away in her closet.  once all four  of them try them on they realize that there is really something special about these pants.  seeming as how all 4 girls are differnt shapes and sizes and somehow the pants fit all of them,  they realize that these pants were the start of something special.  immediatley following they decided to make up certian rules abut the pants such as you must write the best thing u did while wearing the pants over your summer on the right leg and also some silly things such as to \\&quot;&quot;never pick yuor nose while wearing the pants.\\&quot;&quot;  this book follows the girls throuh their summers in differnt places of the world and through all of the different obstacles that life takes them through. it can really teach you alot not only about what is going on around you but most imporntantly about yuorself.  i would give this book 4 stars and would reccommend it to anyone who seems the slihgtest bit interested.&apos;,&apos;2005-10-14&apos;);
+</stringProp>
             <stringProp name="queryArguments"></stringProp>
             <stringProp name="queryArgumentsTypes"></stringProp>
             <stringProp name="queryTimeout"></stringProp>
@@ -98,7 +84,7 @@
                   </elementProp>
                   <elementProp name="application" elementType="Argument">
                     <stringProp name="Argument.name">application</stringProp>
-                    <stringProp name="Argument.value">MySQL DELETE</stringProp>
+                    <stringProp name="Argument.value">MySQL CREATE</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                   <elementProp name="measurement" elementType="Argument">
@@ -142,6 +128,18 @@
             </BackendListener>
             <hashTree/>
           </hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="delimiter">,</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="filename">../data/ids.tsv</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+            <boolProp name="stopThread">true</boolProp>
+            <stringProp name="variableNames">no,review_id</stringProp>
+          </CSVDataSet>
+          <hashTree/>
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">

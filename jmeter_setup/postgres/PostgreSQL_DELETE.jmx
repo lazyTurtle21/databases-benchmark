@@ -26,7 +26,7 @@
         <stringProp name="dataSource">postgres_pool</stringProp>
         <stringProp name="dbUrl">jdbc:postgresql://mysql:5432/test</stringProp>
         <stringProp name="driver">org.postgresql.Driver</stringProp>
-        <stringProp name="initQuery">truncate reviews;</stringProp>
+        <stringProp name="initQuery"></stringProp>
         <boolProp name="keepAlive">true</boolProp>
         <stringProp name="password">tests-password</stringProp>
         <stringProp name="poolMax">0</stringProp>
@@ -46,7 +46,7 @@
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">10</stringProp>
+        <stringProp name="ThreadGroup.duration">20</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
@@ -131,7 +131,7 @@
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="filename">./ids.tsv</stringProp>
+            <stringProp name="filename">../data/ids.tsv</stringProp>
             <boolProp name="ignoreFirstLine">true</boolProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">false</boolProp>
@@ -140,6 +140,113 @@
             <stringProp name="variableNames">no,review_id</stringProp>
           </CSVDataSet>
           <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">10</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Read ids" enabled="true">
+          <stringProp name="dataSource">postgres_pool</stringProp>
+          <stringProp name="query">select id from reviews;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultVariable">ids</stringProp>
+          <stringProp name="variableNames">id</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
+          <stringProp name="ForeachController.inputVal">id</stringProp>
+          <stringProp name="ForeachController.returnVal">current_id</stringProp>
+          <boolProp name="ForeachController.useSeparator">true</boolProp>
+        </ForeachController>
+        <hashTree>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request_${__time(HH:mm dd-MM)} " enabled="true">
+            <stringProp name="dataSource">postgres_pool</stringProp>
+            <stringProp name="query">delete from reviews where id=&apos;${current_id}&apos;;</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="queryType">Callable Statement</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+          </JDBCSampler>
+          <hashTree>
+            <BackendListener guiclass="BackendListenerGui" testclass="BackendListener" testname="Backend Listener" enabled="true">
+              <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="influxdbMetricsSender" elementType="Argument">
+                    <stringProp name="Argument.name">influxdbMetricsSender</stringProp>
+                    <stringProp name="Argument.value">org.apache.jmeter.visualizers.backend.influxdb.HttpMetricsSender</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="influxdbUrl" elementType="Argument">
+                    <stringProp name="Argument.name">influxdbUrl</stringProp>
+                    <stringProp name="Argument.value">http://grafana:8086/write?db=test</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="application" elementType="Argument">
+                    <stringProp name="Argument.name">application</stringProp>
+                    <stringProp name="Argument.value">Postgres DELETE</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="measurement" elementType="Argument">
+                    <stringProp name="Argument.name">measurement</stringProp>
+                    <stringProp name="Argument.value">jmeter</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="summaryOnly" elementType="Argument">
+                    <stringProp name="Argument.name">summaryOnly</stringProp>
+                    <stringProp name="Argument.value">false</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="samplersRegex" elementType="Argument">
+                    <stringProp name="Argument.name">samplersRegex</stringProp>
+                    <stringProp name="Argument.value">.*</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="percentiles" elementType="Argument">
+                    <stringProp name="Argument.name">percentiles</stringProp>
+                    <stringProp name="Argument.value">90;95;99</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="testTitle" elementType="Argument">
+                    <stringProp name="Argument.name">testTitle</stringProp>
+                    <stringProp name="Argument.value">Test name</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="eventTags" elementType="Argument">
+                    <stringProp name="Argument.name">eventTags</stringProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="transaction" elementType="Argument">
+                    <stringProp name="Argument.name">transaction</stringProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="classname">org.apache.jmeter.visualizers.backend.influxdb.InfluxdbBackendListenerClient</stringProp>
+            </BackendListener>
+            <hashTree/>
+          </hashTree>
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
