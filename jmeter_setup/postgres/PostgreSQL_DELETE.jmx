@@ -26,7 +26,7 @@
         <stringProp name="dataSource">postgres_pool</stringProp>
         <stringProp name="dbUrl">jdbc:postgresql://mysql:5432/test</stringProp>
         <stringProp name="driver">org.postgresql.Driver</stringProp>
-        <stringProp name="initQuery">truncate reviews;</stringProp>
+        <stringProp name="initQuery"></stringProp>
         <boolProp name="keepAlive">true</boolProp>
         <stringProp name="password">tests-password</stringProp>
         <stringProp name="poolMax">0</stringProp>
@@ -51,6 +51,19 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JDBC Request" enabled="true">
+          <stringProp name="dataSource"></stringProp>
+          <stringProp name="queryType">Callable Statement</stringProp>
+          <stringProp name="query">truncate reviews;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
         <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
           <stringProp name="WhileController.condition">${review_id}</stringProp>
         </WhileController>
