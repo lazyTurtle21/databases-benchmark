@@ -52,7 +52,7 @@
       </ThreadGroup>
       <hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JDBC Request" enabled="true">
-          <stringProp name="dataSource"></stringProp>
+          <stringProp name="dataSource">mysql_pool</stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="query">truncate reviews;</stringProp>
           <stringProp name="queryArguments"></stringProp>
