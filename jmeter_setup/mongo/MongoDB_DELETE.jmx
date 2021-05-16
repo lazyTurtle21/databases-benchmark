@@ -269,8 +269,6 @@ while(ids.hasNext()) {
 }
 
 
-//vars.putObject(&quot;ids&quot;, ids)vars.putObject(&quot;id&quot;, &quot;RYUKPRP57GYLX&quot;);;
-
 }
 catch (Exception e) {
 SampleResult.setSuccessful(false);
@@ -287,7 +285,7 @@ SampleResult.setResponseMessage(&quot;Exception: &quot; + e);
           <boolProp name="ForeachController.useSeparator">true</boolProp>
         </ForeachController>
         <hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="request_${__time(HH:mm dd-MM)} " enabled="true">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="request ${__time(HH:mm:ss dd-MM)} " enabled="true">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>

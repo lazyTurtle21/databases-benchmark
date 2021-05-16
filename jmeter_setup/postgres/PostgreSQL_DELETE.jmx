@@ -129,7 +129,7 @@
           <boolProp name="ForeachController.useSeparator">true</boolProp>
         </ForeachController>
         <hashTree>
-          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request_${__time(HH:mm dd-MM)} " enabled="true">
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request ${__time(HH:mm:ss dd-MM)} " enabled="true">
             <stringProp name="dataSource">postgres_pool</stringProp>
             <stringProp name="query">delete from reviews where id=&apos;${current_id}&apos;;</stringProp>
             <stringProp name="queryArguments"></stringProp>
