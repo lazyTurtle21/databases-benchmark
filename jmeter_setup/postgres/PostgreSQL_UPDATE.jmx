@@ -53,7 +53,7 @@ insert into reviews(id,product_title,star_rating,helpful_votes,total_votes,verif
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request ${__time(HH:mm:ss dd-MM)} " enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request ${__time(HH:mm dd-MM)}" enabled="true">
           <stringProp name="dataSource">postgres_pool</stringProp>
           <stringProp name="query">update reviews set verified_purchase = not verified_purchase WHERE id = &apos;RQ58W7SMO911M&apos;;</stringProp>
           <stringProp name="queryArguments"></stringProp>

@@ -191,7 +191,7 @@ SampleResult.setResponseMessage(&quot;Exception: &quot; + e);
           <stringProp name="WhileController.condition">1</stringProp>
         </WhileController>
         <hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="request ${__time(HH:mm:ss dd-MM)} " enabled="true">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="request ${__time(HH:mm dd-MM)}" enabled="true">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
