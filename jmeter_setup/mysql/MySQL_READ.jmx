@@ -55,11 +55,11 @@ insert into reviews(id,product_title,star_rating,helpful_votes,total_votes,verif
       <hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="request ${__time(HH:mm dd-MM)}" enabled="true">
           <stringProp name="dataSource">mysql_pool</stringProp>
-          <stringProp name="query">update reviews set verified_purchase = not verified_purchase WHERE id = &apos;RQ58W7SMO911M&apos;;</stringProp>
+          <stringProp name="query">select * from reviews WHERE id = &apos;RQ58W7SMO911M&apos;;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="queryType">Update Statement</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultVariable"></stringProp>
